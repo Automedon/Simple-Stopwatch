@@ -5,7 +5,10 @@
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-redux": "^7.0.3",
+    "react-scripts": "3.0.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -13,6 +16,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "homepage": "https://automedon.github.io/Simple-Stopwatch/",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -22,6 +26,7 @@
       "not dead",
       "not op_mini all"
     ],
+
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

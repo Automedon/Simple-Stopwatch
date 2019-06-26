@@ -1,26 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { connect } from "react-redux";
+import {
+  decreaseInterval,
+  increaseInterval,
+  startStopwatch,
+  stopStopwatch
+} from "./actions/stopwatchActions.js";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    const { ticking, interval, seconds } = this.props.stopWatch;
+    return (
+      <div className="App">
+        <div>
+          {`Refresh interval  ${interval / 1000} sec      `}
+          <button
+            disabled={ticking}
+            onClick={() => this.props.increaseInterval()}
+          >
+            increase
+          </button>
+          <button
+            disabled={ticking}
+            onClick={() => this.props.decreaseInterval()}
+          >
+            decrease
+          </button>
+        </div>
+
+        <div>
+          {`Stopwatch:  ${seconds} sec     `}
+          <button onClick={() => this.props.startStopwatch(interval)}>
+            Start
+          </button>
+          <button onClick={() => this.props.stopStopwatch()}>Stop</button>
+        </div>
+        {ticking && interval === 0 && (
+          <div>Ok, it's working, but u sure that interval should be zero?</div>
+        )}
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    stopWatch: state.stopWatch
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { increaseInterval, decreaseInterval, startStopwatch, stopStopwatch }
+)(App);
